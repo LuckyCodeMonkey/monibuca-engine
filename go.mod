@@ -1,4 +1,4 @@
-module https://github.com/LuckyCodeMonkey/monibuca-engine
+module github.com/LuckyCodeMonkey/monibuca-engine
 
 go 1.20
 
