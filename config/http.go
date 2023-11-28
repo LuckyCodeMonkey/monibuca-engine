@@ -71,7 +71,13 @@ func (config *HTTP) Listen(ctx context.Context) error {
 		return nil
 	}
 	var g errgroup.Group
-	if config.ListenAddrTLS != "" && (config == &Global.HTTP || config.ListenAddrTLS != Global.ListenAddrTLS) {
+	if config.ListenAddrTLS == "" {
+		config.ListenAddrTLS = Global.ListenAddrTLS
+	}
+	if config.ListenAddr == "" {
+		config.ListenAddr = Global.ListenAddr
+	}
+	if config.ListenAddrTLS != "" {
 		g.Go(func() error {
 			if Global.LogLang == "zh" {
 				log.Info("🌐 https 监听在 ", aurora.Blink(config.ListenAddrTLS))
@@ -113,7 +119,7 @@ func (config *HTTP) Listen(ctx context.Context) error {
 			return server.ListenAndServeTLS(config.CertFile, config.KeyFile)
 		})
 	}
-	if config.ListenAddr != "" && (config == &Global.HTTP || config.ListenAddr != Global.ListenAddr) {
+	if config.ListenAddr != "" {
 		g.Go(func() error {
 			if Global.LogLang == "zh" {
 				log.Info("🌐 http 监听在 ", aurora.Blink(config.ListenAddr))
