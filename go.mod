@@ -1,4 +1,4 @@
-module m7s.live/engine/v4
+module https://github.com/LuckyCodeMonkey/monibuca-engine
 
 go 1.20
 
